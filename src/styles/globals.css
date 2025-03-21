@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 255 255 255;
+  --foreground: 0 0 0;
+  --primary: 0 122 255;
+  --primary-foreground: 255 255 255;
+  --secondary: 88 86 214;
+  --secondary-foreground: 255 255 255;
+  --muted: 240 240 240;
+  --muted-foreground: 115 115 115;
+  --border: 230 230 230;
+  --animation-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark {
+  --background: 28 28 30;
+  --foreground: 255 255 255;
+  --primary: 10 132 255;
+  --primary-foreground: 255 255 255;
+  --secondary: 94 92 230;
+  --secondary-foreground: 255 255 255;
+  --muted: 44 44 46;
+  --muted-foreground: 175 175 175;
+  --border: 44 44 46;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Selection style */
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Gradient text for headings */
+  .gradient-heading {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary/90 to-secondary/90;
+    background-size: 150% auto;
+    animation: gradient-shift 8s linear infinite alternate;
+  }
+  
+  /* Card hover effects */
+  .card-hover-effect {
+    @apply transition-all duration-300 hover:shadow-xl;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card-hover-effect::after {
+    content: "";
+    position: absolute;
+    height: 200px;
+    width: 40px;
+    background: rgba(255, 255, 255, 0.15);
+    top: -100px;
+    left: -100px;
+    transform: rotate(30deg);
+    transition: transform 0.6s;
+  }
+  
+  .card-hover-effect:hover::after {
+    transform: rotate(30deg) translateX(300px);
+  }
+  
+  /* Shadow glow effect for timeline dots */
+  .shadow-glow {
+    box-shadow: 0 0 15px rgba(var(--primary), 0.6);
+  }
+  
+  /* Improved text links */
+  .text-link {
+    @apply text-primary relative;
+    text-decoration: none;
+    position: relative;
+  }
+  
+  .text-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgb(var(--primary));
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s var(--animation-timing);
+  }
+  
+  .text-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+  
+  /* Button hover effects */
+  .button-hover-effect {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .button-hover-effect::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(var(--primary), 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s var(--animation-timing);
+    z-index: -1;
+  }
+  
+  .button-hover-effect:hover::before {
+    transform: translateX(0);
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-in-out forwards;
+  }
+  
+  .animate-slide-in-left {
+    animation: slideInLeft 0.5s ease-in-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s ease-in-out forwards;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulseGlow 2s infinite;
+  }
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 5px rgba(var(--primary), 0.3); }
+  50% { box-shadow: 0 0 20px rgba(var(--primary), 0.6); }
+  100% { box-shadow: 0 0 5px rgba(var(--primary), 0.3); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+} 
