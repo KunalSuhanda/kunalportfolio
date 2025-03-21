@@ -62,5 +62,3 @@ The site can be deployed to Vercel:
 3. Deploy!
 
 ## License
-
-MIT 
